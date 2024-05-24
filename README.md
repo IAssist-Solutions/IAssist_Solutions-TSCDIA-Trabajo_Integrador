@@ -1,9 +1,9 @@
 # IAssist_Solutions-TSCDIA-Trabajo_Integrador
 
 ## Integrantes del grupo
-Mario Arce | 39302448 | marioezequielarce95@gmail.com | https://github.com/Marioarce95
-Emilce Robles | 37093958 | emi.nrobles@gmail.com | https://github.com/emirobles 
-Jenifer De Piano | 41087669 | jeniferyamila@hotmail.com https://github.com/JENIF3R1
+* Mario Arce | 39302448 | marioezequielarce95@gmail.com | https://github.com/Marioarce95
+* Emilce Robles | 37093958 | emi.nrobles@gmail.com | https://github.com/emirobles 
+* Jenifer De Piano | 41087669 | jeniferyamila@hotmail.com https://github.com/JENIF3R1
 
 ## Descripción de la Propuesta del Proyecto
 Nombre del Proyecto: Sistema de Gestión de Hábitos

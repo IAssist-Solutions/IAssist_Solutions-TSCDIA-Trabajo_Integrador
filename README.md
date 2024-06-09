@@ -48,8 +48,7 @@ Entidades y Atributos:
 *	name
 *	description
 *	start_date
-*	user_id (FK)
-*	habit_id (FK)
+
 
 3.	Entidad Category (Categoría):
 *	Atributos:
@@ -64,8 +63,7 @@ Entidades y Atributos:
 *	start_time
 *	end_time
 *	duration
-*	user_id (FK)
-*	habit_id (FK)
+
 
 ### Relaciones y Cardinalidades:
 1.	Relación User-Habit (Has):

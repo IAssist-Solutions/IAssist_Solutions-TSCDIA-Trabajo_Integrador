@@ -1,6 +1,8 @@
 from utils import print_menu
 from functions import login, register_user
 from user_management import view_profile, manage_categories, manage_habits, manage_logs
+PURPLE = '\033[95m'
+print(PURPLE)
 
 users = []
 current_user = None
@@ -8,7 +10,7 @@ current_user = None
 def main_menu():
     global current_user
     while True:
-        print("MENU PRINCIPAL")
+        print("\nMENU PRINCIPAL\n")
         choice = print_menu(
             [
                 "Ver Perfil",
@@ -32,18 +34,18 @@ def main_menu():
 def main():
     global current_user
     while True:
-        print("SEGUIMIENTO DE HÁBITOS")
+        print("┌─────────────── ⋆⋅ ☆ ⋅⋆ ───────────────┐")
+        print("\t  SEGUIMIENTO DE HÁBITOS")
+        print("└─────────────── ⋆⋅ ☆ ⋅⋆ ───────────────┘\n")
         choice = print_menu(["Registro de Usuario", "Iniciar Sesión", "Salir"])
         if choice == 1:
             register_user(users)
         elif choice == 2:
-            current_user = login(users)
-            print(f"Usuario actual: {[user.username for user in users]}")
-            print(current_user)
+            current_user = login(users)                        
             if current_user:
                 main_menu()
             else:
-                print("Inicio de sesión fallido, intente nuevamente.")
+                print("\n⚠️ Inicio de sesión fallido, intente nuevamente.\n")
         elif choice == 3:
             break
 

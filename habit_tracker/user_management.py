@@ -1,13 +1,15 @@
 from utils import get_input, print_menu
 from models import Category, Habit, HabitLog
 
+# Para ver datos del Usuario creado
 def view_profile(current_user):
-    print("Perfil")
+    print("\nPERFIL\n")
     print(current_user)
 
+# Gestiona las categorías del usuario actual
 def manage_categories(current_user):
     while True:
-        print("Categorías")
+        print("\nCATEGORIAS\n")
         choice = print_menu(["Ver Categorías", "Crear Categoría", "Editar Categoría", "Eliminar Categoría", "Volver al Menú Principal"])
         if choice == 1:
             for category in current_user.categories:
@@ -39,9 +41,10 @@ def manage_categories(current_user):
         elif choice == 5:
             break
 
+# Gestiona los hábitos del usuario actual
 def manage_habits(current_user):
     while True:
-        print("Hábitos")
+        print("\nHÁBITOS\n")
         choice = print_menu(["Ver Hábitos", "Crear Hábito", "Editar Hábito", "Eliminar Hábito", "Volver al Menú Principal"])
         if choice == 1:
             for habit in current_user.habits:
@@ -89,9 +92,10 @@ def manage_habits(current_user):
         elif choice == 5:
             break
 
+# Gestiona los registros de los hábitos del usuario actual
 def manage_logs(current_user):
     while True:
-        print("Registros")
+        print("\nREGISTROS\n")
         choice = print_menu(["Ver Registros", "Añadir Registro", "Volver al Menú Principal"])
         if choice == 1:
             for habit in current_user.habits:

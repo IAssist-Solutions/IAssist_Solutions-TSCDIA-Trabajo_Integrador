@@ -9,7 +9,7 @@
 Nombre del Proyecto: Sistema de Gestión de Hábitos
 
 ### Objetivo del Proyecto:
-Desarrollar una aplicación web que permita a los usuarios gestionar y seguir sus hábitos diarios, categorizarlos y registrar sus progresos. El sistema ofrecerá funcionalidades para crear, visualizar y analizar hábitos, así como registrar y revisar el historial de actividades relacionadas con esos hábitos.
+Desarrollar una aplicación de escritorio que permita a los usuarios gestionar y seguir sus hábitos diarios, categorizarlos y registrar sus progresos. El sistema ofrecerá funcionalidades para crear, visualizar y analizar hábitos, así como registrar y revisar el historial de actividades relacionadas con esos hábitos.
 Justificación:
 La gestión de hábitos es una herramienta clave para el desarrollo personal y la productividad. Un sistema que permita a los usuarios registrar sus hábitos, clasificarlos y hacer seguimiento de su progreso proporcionará una estructura valiosa para quienes buscan mejorar sus rutinas diarias. La aplicación ofrecerá una solución centralizada y accesible para el seguimiento de hábitos, contribuyendo así al bienestar y la eficiencia personal de los usuarios.
 
@@ -48,6 +48,8 @@ Entidades y Atributos:
 *	name
 *	description
 *	start_date
+*	user_id (FK)
+*	habit_id (FK)
 
 3.	Entidad Category (Categoría):
 *	Atributos:
@@ -58,6 +60,12 @@ Entidades y Atributos:
 *	Atributos:
 *	log_id (PK)
 *	log_date
+*	description
+*	start_time
+*	end_time
+*	duration
+*	user_id (FK)
+*	habit_id (FK)
 
 ### Relaciones y Cardinalidades:
 1.	Relación User-Habit (Has):

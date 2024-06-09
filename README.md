@@ -32,7 +32,7 @@ El proyecto contempla el diseño, desarrollo y despliegue de una aplicación web
 *	Análisis y seguimiento del progreso de los hábitos.
 
 ### Diagrama Entidad-Relación (ER) en Notación de Chen:
-![Diagrama Entidad Relacion](https://github.com/IAssist-Solutions/IAssist_Solutions-TSCDIA-Trabajo_Integrador/blob/main/DER.PNG)
+https://github.com/IAssist-Solutions/IAssist_Solutions-TSCDIA-Trabajo_Integrador/blob/2ccb37dd414c2e06f3964caa35029432f2577a74/DER_Modificado.drawio.png
 
 Entidades y Atributos:
 1.	Entidad User (Usuario):

@@ -1,5 +1,7 @@
 import re
 
+#Validaciones de los inputs que carga por teclado el usuario
+
 def validate_username(username):
     if not username.isalpha():
         return False, "El nombre debe contener solo letras"

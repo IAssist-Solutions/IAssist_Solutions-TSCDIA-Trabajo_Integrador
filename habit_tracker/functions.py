@@ -46,11 +46,11 @@ def login(users):
     print("\n╭──────────────────────────────────────╮")
     print("\t     INICIAR SESIÓN")
     print("╰──────────────────────────────────────╯\n")
-    username = get_input("Ingrese nombre de usuario: ")
-    password = get_input("Ingrese contraseña: ")
+    username = get_input("➤ Ingrese nombre de usuario: ")
+    password = get_input("➤ Ingrese contraseña: ")
     for user in users:
         if user.username == username and user.password == password:
-            print(f"¡Usuario {user.username} inició sesión exitosamente!")
+            print(f"\n¡Usuario {user.username} inició sesión exitosamente!\n")
             return user
-    print("Nombre de usuario o contraseña incorrectos.")
+    print("Nombre de usuario o contraseña incorrectos.\n")
     return None

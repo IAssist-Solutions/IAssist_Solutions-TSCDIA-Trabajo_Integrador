@@ -10,7 +10,9 @@ current_user = None
 def main_menu():
     global current_user
     while True:
-        print("\nMENU PRINCIPAL\n")
+        print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
+        print("\t    MENU PRINCIPAL")
+        print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
         choice = print_menu(
             [
                 "Ver Perfil",

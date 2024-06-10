@@ -1,10 +1,18 @@
-# Para solicitar y devolver la entrada del usuario, eliminando espacios al principio y al final
-def get_input(prompt):
-    return input(prompt).strip()
+def print_header(title):
+    print("\n" + "="*len(title))
+    print(title)
+    print("="*len(title) + "\n")
 
-# Para imprimir un menú numerado basado en las opciones dadas y solicitar al usuario que elija una opción
 def print_menu(options):
+    print_header("Seleccione una opción")
     for i, option in enumerate(options, 1):
         print(f"{i}. {option}")
-    choice = input("\n➤ Elija una opción: ").strip()
-    return int(choice) if choice.isdigit() and 1 <= int(choice) <= len(options) else None
+    while True:
+        try:
+            choice = int(input("\nIngrese el número de la opción deseada: "))
+            if 1 <= choice <= len(options):
+                return choice
+            else:
+                print("Opción inválida. Por favor, intente nuevamente.")
+        except ValueError:
+            print("Entrada inválida. Por favor, ingrese un número.")

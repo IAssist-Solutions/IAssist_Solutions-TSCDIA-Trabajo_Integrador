@@ -9,10 +9,10 @@ def print_menu(options):
         print(f"{i}. {option}")
     while True:
         try:
-            choice = int(input("\n➤ Ingrese el número de la opción deseada: "))
+            choice = int(input("\nIngrese el número de la opción deseada: "))
             if 1 <= choice <= len(options):
                 return choice
             else:
-                print("\nOpción inválida. Por favor, intente nuevamente.")
+                print("Opción inválida. Por favor, intente nuevamente.")
         except ValueError:
-            print("\nEntrada inválida. Por favor, ingrese un número.")
+            print("Entrada inválida. Por favor, ingrese un número.")

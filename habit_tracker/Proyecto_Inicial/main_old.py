@@ -1,6 +1,6 @@
-from utils import print_menu
-from functions import login, register_user
-from user_management import view_profile, manage_categories, manage_habits, manage_logs
+from utils_old import print_menu
+from functions_old import login, register_user
+from user_management_old import view_profile, manage_categories, manage_habits, manage_logs
 PURPLE = '\033[95m'
 print(PURPLE)
 

@@ -1,6 +1,6 @@
-from models import User
-from utils import get_input
-from validations import (
+from models_old import User
+from utils_old import get_input
+from validations_old import (
     validate_username,
     validate_email,
     validate_password

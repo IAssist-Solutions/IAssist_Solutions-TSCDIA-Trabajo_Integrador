@@ -1,5 +1,5 @@
-from utils import get_input, print_menu
-from models import Category, Habit, HabitLog
+from utils_old import get_input, print_menu
+from models_old import Category, Habit, HabitLog
 
 # Para ver datos del Usuario creado
 def view_profile(current_user):

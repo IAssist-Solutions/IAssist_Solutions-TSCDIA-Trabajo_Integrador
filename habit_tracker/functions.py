@@ -4,10 +4,13 @@ from db_connection import create_connection, close_connection
 def view_profile(user_id):
     connection = create_connection()
     if connection:
-        cursor = connection.cursor()
+        cursor = connection.cursor()        
         cursor.execute(f"SELECT username, email FROM user WHERE user_id = {user_id}")
         user = cursor.fetchone()
         if user:
+            print("\n╭──────────────────────────────────────╮")
+            print("\t        TU PERFIL")
+            print("╰──────────────────────────────────────╯\n")
             print(f"Nombre de usuario: {user[0]}")
             print(f"Correo electrónico: {user[1]}")
         close_connection(connection)
@@ -15,13 +18,15 @@ def view_profile(user_id):
 # Función para gestionar categorías
 def manage_categories(user_id):
     while True:
-        print("\nMenú de Categorías")
+        print("\n╭──────────────────────────────────────╮")
+        print("\t     MENU CATEGORIAS")
+        print("╰──────────────────────────────────────╯\n")        
         print("1. Ver todas las categorías")
         print("2. Agregar nueva categoría")
         print("3. Editar categoría existente")
         print("4. Eliminar categoría")
         print("5. Volver al menú principal")
-        choice = input("Ingrese su opción: ")
+        choice = input("\n➤ Ingrese su opción: ")
 
         if choice == '1':
             view_categories()
@@ -42,12 +47,14 @@ def view_categories():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM category")
         categories = cursor.fetchall()
+        print("CATEGORIAS DISPONIBLES:")
         for category in categories:
             print(f"{category[0]}: {category[1]}")
         close_connection(connection)
 
 def add_category():
-    category_name = input("Ingrese el nombre de la categoría: ")
+    print("\nNUEVA CATEGORIA:")
+    category_name = input("\n➤ Ingrese el nombre de la categoría: ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
@@ -57,8 +64,9 @@ def add_category():
         close_connection(connection)
 
 def edit_category():
-    category_id = input("Ingrese el ID de la categoría a editar(Nro): ")
-    new_category_name = input("Ingrese el nuevo nombre de la categoría: ")
+    print("\nEDICIÓN DE CATEGORIA:")
+    category_id = input("\n➤ Ingrese el ID de la categoría a editar(Nro): ")
+    new_category_name = input("➤ Ingrese el nuevo nombre de la categoría: ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
@@ -68,7 +76,8 @@ def edit_category():
         close_connection(connection)
 
 def delete_category():
-    category_id = input("Ingrese el ID de la categoría a eliminar(Nro): ")
+    print("\nBORRADO DE CATEGORIA:")
+    category_id = input("\n➤ Ingrese el ID de la categoría a eliminar(Nro): ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
@@ -80,13 +89,15 @@ def delete_category():
 # Función para gestionar hábitos
 def manage_habits(user_id):
     while True:
-        print("\nMenú de Hábitos")
+        print("\n╭──────────────────────────────────────╮")
+        print("\t MENU DE HABITOS")
+        print("╰──────────────────────────────────────╯\n")         
         print("1. Ver todos los hábitos")
         print("2. Agregar nuevo hábito")
         print("3. Editar hábito existente")
         print("4. Eliminar hábito")
         print("5. Volver al menú principal")
-        choice = input("Ingrese su opción: ")
+        choice = input("\n➤ Ingrese su opción: ")
 
         if choice == '1':
             view_habits(user_id)
@@ -99,7 +110,7 @@ def manage_habits(user_id):
         elif choice == '5':
             break
         else:
-            print("Opción inválida, por favor intente nuevamente.")
+            print("\nOpción inválida, por favor intente nuevamente.")
 
 def view_habits(user_id):
     connection = create_connection()
@@ -112,52 +123,54 @@ def view_habits(user_id):
         close_connection(connection)
 
 def add_habit(user_id):
-    name = input("Ingrese el nombre del hábito: ")
-    description = input("Ingrese la descripción del hábito: ")
-    start_date = input("Ingrese la fecha de inicio (YYYY-MM-DD): ")
-    category_id = input("Ingrese el ID de la categoría: ")
+    name = input("➤ Ingrese el nombre del hábito: ")
+    description = input("➤ Ingrese la descripción del hábito: ")
+    start_date = input("➤ Ingrese la fecha de inicio (YYYY-MM-DD): ")
+    category_id = input("➤ Ingrese el ID de la categoría(Nro): ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
         cursor.execute(f"INSERT INTO habit (name, description, start_date, category_id, user_id) VALUES ('{name}', '{description}', '{start_date}', {category_id}, {user_id})")
         connection.commit()
-        print("Hábito agregado exitosamente.")
+        print("\nHábito agregado exitosamente.")
         close_connection(connection)
 
 def edit_habit():
-    habit_id = input("Ingrese el ID del hábito a editar: ")
-    new_name = input("Ingrese el nuevo nombre del hábito: ")
-    new_description = input("Ingrese la nueva descripción del hábito: ")
-    new_start_date = input("Ingrese la nueva fecha de inicio (YYYY-MM-DD): ")
-    new_category_id = input("Ingrese el nuevo ID de la categoría: ")
+    habit_id = input("➤ Ingrese el ID del hábito a editar(Nro): ")
+    new_name = input("➤ Ingrese el nuevo nombre del hábito: ")
+    new_description = input("➤ Ingrese la nueva descripción del hábito: ")
+    new_start_date = input("➤ Ingrese la nueva fecha de inicio (YYYY-MM-DD): ")
+    new_category_id = input("➤ Ingrese el nuevo ID de la categoría: ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
         cursor.execute(f"UPDATE habit SET name = '{new_name}', description = '{new_description}', start_date = '{new_start_date}', category_id = {new_category_id} WHERE habit_id = {habit_id}")
         connection.commit()
-        print("Hábito editado exitosamente.")
+        print("\nHábito editado exitosamente.")
         close_connection(connection)
 
 def delete_habit():
-    habit_id = input("Ingrese el ID del hábito a eliminar: ")
+    habit_id = input("➤ Ingrese el ID del hábito a eliminar(Nro): ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
         cursor.execute(f"DELETE FROM habit WHERE habit_id = {habit_id}")
         connection.commit()
-        print("Hábito eliminado exitosamente.")
+        print("\nHábito eliminado exitosamente.")
         close_connection(connection)
 
 # Función para gestionar registros de hábitos
 def manage_logs(user_id):
     while True:
-        print("\nMenú de Registros")
+        print("\n╭──────────────────────────────────────╮")
+        print("\t   MENU DE REGISTROS")
+        print("╰──────────────────────────────────────╯\n")        
         print("1. Ver todos los registros")
         print("2. Agregar nuevo registro")
         print("3. Editar registro existente")
         print("4. Eliminar registro")
         print("5. Volver al menú principal")
-        choice = input("Ingrese su opción: ")
+        choice = input("➤ Ingrese su opción: ")
 
         if choice == '1':
             view_logs(user_id)
@@ -170,7 +183,7 @@ def manage_logs(user_id):
         elif choice == '5':
             break
         else:
-            print("Opción inválida, por favor intente nuevamente.")
+            print("\nOpción inválida, por favor intente nuevamente.")
 
 def view_logs(user_id):
     connection = create_connection()
@@ -183,41 +196,41 @@ def view_logs(user_id):
         close_connection(connection)
 
 def add_log(user_id):
-    log_date = input("Ingrese la fecha del registro (YYYY-MM-DD): ")
-    description = input("Ingrese la descripción del registro: ")
-    start_time = input("Ingrese la hora de inicio (HH:MM:SS): ")
-    end_time = input("Ingrese la hora de finalización (HH:MM:SS): ")
-    duration = int(input("Ingrese la duración en minutos: "))
-    habit_id = input("Ingrese el ID del hábito: ")
+    log_date = input("➤ Ingrese la fecha del registro (YYYY-MM-DD): ")
+    description = input("➤ Ingrese la descripción del registro: ")
+    start_time = input("➤ Ingrese la hora de inicio (HH:MM:SS): ")
+    end_time = input("➤ Ingrese la hora de finalización (HH:MM:SS): ")
+    duration = int(input("➤ Ingrese la duración en minutos: "))
+    habit_id = input("➤ Ingrese el ID del hábito(Nro): ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
         cursor.execute(f"INSERT INTO habitlog (log_date, description, start_time, end_time, duration, user_id, habit_id) VALUES ('{log_date}', '{description}', '{start_time}', '{end_time}', {duration}, {user_id}, {habit_id})")
         connection.commit()
-        print("Registro agregado exitosamente.")
+        print("\nRegistro agregado exitosamente.")
         close_connection(connection)
 
 def edit_log():
-    log_id = input("Ingrese el ID del registro a editar: ")
-    new_log_date = input("Ingrese la nueva fecha del registro (YYYY-MM-DD): ")
-    new_description = input("Ingrese la nueva descripción del registro: ")
-    new_start_time = input("Ingrese la nueva hora de inicio (HH:MM:SS): ")
-    new_end_time = input("Ingrese la nueva hora de finalización (HH:MM:SS): ")
-    new_duration = int(input("Ingrese la nueva duración en minutos: "))
+    log_id = input("➤ Ingrese el ID del registro a editar(Nro): ")
+    new_log_date = input("➤ Ingrese la nueva fecha del registro (YYYY-MM-DD): ")
+    new_description = input("➤ Ingrese la nueva descripción del registro: ")
+    new_start_time = input("➤ Ingrese la nueva hora de inicio (HH:MM:SS): ")
+    new_end_time = input("➤ Ingrese la nueva hora de finalización (HH:MM:SS): ")
+    new_duration = int(input("➤ Ingrese la nueva duración en minutos: "))
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
         cursor.execute(f"UPDATE habitlog SET log_date = '{new_log_date}', description = '{new_description}', start_time = '{new_start_time}', end_time = '{new_end_time}', duration = {new_duration} WHERE log_id = {log_id}")
         connection.commit()
-        print("Registro editado exitosamente.")
+        print("\nRegistro editado exitosamente.")
         close_connection(connection)
 
 def delete_log():
-    log_id = input("Ingrese el ID del registro a eliminar: ")
+    log_id = input("➤ Ingrese el ID del registro a eliminar(Nro): ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
         cursor.execute(f"DELETE FROM habitlog WHERE log_id = {log_id}")
         connection.commit()
-        print("Registro eliminado exitosamente.")
+        print("\nRegistro eliminado exitosamente.")
         close_connection(connection)

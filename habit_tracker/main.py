@@ -11,7 +11,7 @@ def main_menu():
     while True:
         print("\n●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
         print("\t    MENU PRINCIPAL")
-        print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
+        print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
         choice = print_menu(
             [
                 "Ver Perfil",
@@ -31,7 +31,7 @@ def main_menu():
             manage_logs(current_user[0])
         elif choice == 5:
             print("\n●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
-            print("\t    Ha cerrado sesión")
+            print("\t   Ha cerrado sesión")
             print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
             break
 
@@ -72,8 +72,8 @@ def main():
             else:
                 print("\n⚠️ Inicio de sesión fallido, intente nuevamente.\n")
         elif choice == 3:
-            admin_user = input("Ingrese el usuario administrador: ")
-            admin_password = input("Ingrese la contraseña del administrador: ")
+            admin_user = input("\n➤ Ingrese el usuario administrador: ")
+            admin_password = input("➤ Ingrese la contraseña del administrador: ")
             if admin_user == 'admin' and admin_password == 'admin':
                 admin_menu()
             else:

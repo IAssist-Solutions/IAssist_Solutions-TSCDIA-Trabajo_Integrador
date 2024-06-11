@@ -57,7 +57,7 @@ def add_category():
         close_connection(connection)
 
 def edit_category():
-    category_id = input("Ingrese el ID de la categoría a editar: ")
+    category_id = input("Ingrese el ID de la categoría a editar(Nro): ")
     new_category_name = input("Ingrese el nuevo nombre de la categoría: ")
     connection = create_connection()
     if connection:
@@ -68,7 +68,7 @@ def edit_category():
         close_connection(connection)
 
 def delete_category():
-    category_id = input("Ingrese el ID de la categoría a eliminar: ")
+    category_id = input("Ingrese el ID de la categoría a eliminar(Nro): ")
     connection = create_connection()
     if connection:
         cursor = connection.cursor()

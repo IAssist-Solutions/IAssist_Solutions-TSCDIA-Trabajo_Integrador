@@ -1,13 +1,15 @@
 from user_management import register_user, login
 from functions import view_profile, manage_categories, manage_habits, manage_logs
 from utils import print_menu
+PURPLE = '\033[95m'
+print(PURPLE)
 
 current_user = None
 
 def main_menu():
     global current_user
     while True:
-        print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
+        print("\n●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
         print("\t    MENU PRINCIPAL")
         print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
         choice = print_menu(
@@ -28,11 +30,14 @@ def main_menu():
         elif choice == 4:
             manage_logs(current_user[0])
         elif choice == 5:
+            print("\n●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
+            print("\t    Ha cerrado sesión")
+            print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
             break
 
 def admin_menu():
     while True:
-        print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
+        print("\n●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
         print("\t    MENU ADMINISTRADOR")
         print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
         choice = print_menu(
@@ -56,7 +61,7 @@ def main():
     while True:
         print("┌─────────────── ⋆⋅ ☆ ⋅⋆ ───────────────┐")
         print("\t  SEGUIMIENTO DE HÁBITOS")
-        print("└─────────────── ⋆⋅ ☆ ⋅⋆ ───────────────┘\n")
+        print("└─────────────── ⋆⋅ ☆ ⋅⋆ ───────────────┘")
         choice = print_menu(["Registro de Usuario", "Iniciar Sesión", "Iniciar Sesión como Administrador", "Salir"])
         if choice == 1:
             register_user()
@@ -74,6 +79,9 @@ def main():
             else:
                 print("⚠️ Usuario o contraseña incorrectos.")
         elif choice == 4:
+            print("\n●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●")
+            print("\tHa salido del programa")
+            print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
             break
 
 if __name__ == "__main__":

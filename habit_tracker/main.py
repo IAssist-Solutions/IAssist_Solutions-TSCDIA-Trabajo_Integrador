@@ -1,6 +1,20 @@
+from db_connection import create_connection, close_connection
 from user_management import register_user, login
-from functions import view_profile, manage_categories, manage_habits, manage_logs
+from functions import (
+    view_profile, 
+    manage_categories, 
+    manage_habits, 
+    manage_logs,
+    mostrar_habitos_usuario,
+    filtrar_habitos_por_categoria,
+    obtener_registros_habito,
+    obtener_tiempo_total_habito,
+    mostrar_habitos_y_categorias,
+    mostrar_habitos_con_multiples_registros,
+    filtrar_registros_por_fecha
+)
 from utils import print_menu
+
 PURPLE = '\033[95m'
 print(PURPLE)
 
@@ -42,19 +56,55 @@ def admin_menu():
         print("●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●○●\n")
         choice = print_menu(
             [
-                "Ver Usuarios",
-                "Eliminar Usuario",
-                "Volver al Menú Principal",
+                "Mostrar hábitos de usuario",
+                "Filtrar hábitos por categoría",
+                "Obtener registros de hábitos para un hábito específico",
+                "Obtener tiempo total dedicado a un hábito",
+                "Mostrar hábitos y sus categorías",
+                "Mostrar hábitos con múltiples registros",
+                "Filtrar registros de hábitos por fecha",
+                "Volver al menú principal",
             ]
         )
         if choice == 1:
-            # Implementar la lógica para ver usuarios
-            pass
+            user_id = input("Ingrese el ID del usuario: ")
+            resultados = mostrar_habitos_usuario(user_id)
+            for resultado in resultados:
+                print(resultado)
         elif choice == 2:
-            # Implementar la lógica para eliminar usuarios
-            pass
+            category_id = input("Ingrese el ID de la categoría: ")
+            resultados = filtrar_habitos_por_categoria(category_id)
+            for resultado in resultados:
+                print(resultado)
         elif choice == 3:
+            user_id = input("Ingrese el ID del usuario: ")
+            habit_id = input("Ingrese el ID del hábito: ")
+            resultados = obtener_registros_habito(user_id, habit_id)
+            for resultado in resultados:
+                print(resultado)
+        elif choice == 4:
+            habit_id = input("Ingrese el ID del hábito: ")
+            total_duracion = obtener_tiempo_total_habito(habit_id)
+            print(f"Tiempo total dedicado: {total_duracion} minutos")
+        elif choice == 5:
+            resultados = mostrar_habitos_y_categorias()
+            for resultado in resultados:
+                print(resultado)
+        elif choice == 6:
+            resultados = mostrar_habitos_con_multiples_registros()
+            for resultado in resultados:
+                print(resultado)
+        elif choice == 7:
+            start_date = input("Ingrese la fecha de inicio (YYYY-MM-DD): ")
+            end_date = input("Ingrese la fecha de fin (YYYY-MM-DD): ")
+            resultados = filtrar_registros_por_fecha(start_date, end_date)
+            for resultado in resultados:
+                print(resultado)
+        elif choice == 8:
             break
+        else:
+            print("\nOpción inválida, por favor intente nuevamente.")
+            continue
 
 def main():
     global current_user

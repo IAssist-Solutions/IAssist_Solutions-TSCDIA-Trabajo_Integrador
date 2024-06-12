@@ -4,8 +4,8 @@ from db_connection import create_connection, close_connection
 def view_profile(user_id):
     connection = create_connection()
     if connection:
-        cursor = connection.cursor()        
-        cursor.execute(f"SELECT username, email FROM user WHERE user_id = {user_id}")
+        cursor = connection.cursor()
+        cursor.execute(f"SELECT username, email FROM user WHERE user_id = %s", (user_id,))
         user = cursor.fetchone()
         if user:
             print("\n╭──────────────────────────────────────╮")
@@ -58,7 +58,7 @@ def add_category():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"INSERT INTO category (category_name) VALUES ('{category_name}')")
+        cursor.execute(f"INSERT INTO category (category_name) VALUES (%s)", (category_name,))
         connection.commit()
         print("Categoría agregada exitosamente.")
         close_connection(connection)
@@ -70,7 +70,7 @@ def edit_category():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"UPDATE category SET category_name = '{new_category_name}' WHERE category_id = {category_id}")
+        cursor.execute(f"UPDATE category SET category_name = %s WHERE category_id = %s", (new_category_name, category_id))
         connection.commit()
         print("Categoría editada exitosamente.")
         close_connection(connection)
@@ -81,7 +81,7 @@ def delete_category():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"DELETE FROM category WHERE category_id = {category_id}")
+        cursor.execute("DELETE FROM category WHERE category_id = %s", (category_id,))
         connection.commit()
         print("Categoría eliminada exitosamente.")
         close_connection(connection)
@@ -116,7 +116,7 @@ def view_habits(user_id):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"SELECT * FROM habit WHERE user_id = {user_id}")
+        cursor.execute("SELECT * FROM habit WHERE user_id = %s", (user_id,))
         habits = cursor.fetchall()
         for habit in habits:
             print(f"{habit[0]}: {habit[1]} - {habit[2]}")
@@ -130,7 +130,7 @@ def add_habit(user_id):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"INSERT INTO habit (name, description, start_date, category_id, user_id) VALUES ('{name}', '{description}', '{start_date}', {category_id}, {user_id})")
+        cursor.execute("INSERT INTO habit (name, description, start_date, category_id, user_id) VALUES (%s, %s, %s, %s, %s)",(name, description, start_date, category_id, user_id))
         connection.commit()
         print("\nHábito agregado exitosamente.")
         close_connection(connection)
@@ -144,8 +144,8 @@ def edit_habit():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"UPDATE habit SET name = '{new_name}', description = '{new_description}', start_date = '{new_start_date}', category_id = {new_category_id} WHERE habit_id = {habit_id}")
-        connection.commit()
+        cursor.execute("UPDATE habit SET name = %s, description = %s, start_date = %s, category_id = %s WHERE habit_id = %s",
+                (new_name, new_description, new_start_date, new_category_id, habit_id))
         print("\nHábito editado exitosamente.")
         close_connection(connection)
 
@@ -154,7 +154,7 @@ def delete_habit():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"DELETE FROM habit WHERE habit_id = {habit_id}")
+        cursor.execute("DELETE FROM habit WHERE habit_id = %s", (habit_id,))
         connection.commit()
         print("\nHábito eliminado exitosamente.")
         close_connection(connection)
@@ -189,7 +189,7 @@ def view_logs(user_id):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"SELECT * FROM habitlog WHERE user_id = {user_id}")
+        cursor.execute("SELECT * FROM habitlog WHERE user_id = %s", (user_id,))
         logs = cursor.fetchall()
         for log in logs:
             print(f"{log[0]}: {log[2]} - {log[3]} a {log[4]}, {log[5]} minutos")
@@ -205,7 +205,8 @@ def add_log(user_id):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"INSERT INTO habitlog (log_date, description, start_time, end_time, duration, user_id, habit_id) VALUES ('{log_date}', '{description}', '{start_time}', '{end_time}', {duration}, {user_id}, {habit_id})")
+        cursor.execute("INSERT INTO habitlog (log_date, description, start_time, end_time, duration, user_id, habit_id) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                (log_date, description, start_time, end_time, duration, user_id, habit_id))        
         connection.commit()
         print("\nRegistro agregado exitosamente.")
         close_connection(connection)
@@ -220,7 +221,8 @@ def edit_log():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"UPDATE habitlog SET log_date = '{new_log_date}', description = '{new_description}', start_time = '{new_start_time}', end_time = '{new_end_time}', duration = {new_duration} WHERE log_id = {log_id}")
+        cursor.execute("UPDATE habitlog SET log_date = %s, description = %s, start_time = %s, end_time = %s, duration = %s WHERE log_id = %s",
+                (new_log_date, new_description, new_start_time, new_end_time, new_duration, log_id))
         connection.commit()
         print("\nRegistro editado exitosamente.")
         close_connection(connection)
@@ -230,7 +232,75 @@ def delete_log():
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        cursor.execute(f"DELETE FROM habitlog WHERE log_id = {log_id}")
+        cursor.execute("DELETE FROM habitlog WHERE log_id = %s", (log_id,))
         connection.commit()
         print("\nRegistro eliminado exitosamente.")
         close_connection(connection)
+
+# Funciones de administración
+def mostrar_habitos_usuario(user_id):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM habit WHERE user_id = %s", (user_id,))
+    resultados = cursor.fetchall()
+    close_connection(connection)
+    return resultados
+
+def filtrar_habitos_por_categoria(category_id):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM habit WHERE category_id = %s", (category_id,))
+    resultados = cursor.fetchall()
+    close_connection(connection)
+    return resultados
+
+def obtener_registros_habito(user_id, habit_id):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM habitlog WHERE user_id = %s AND habit_id = %s", (user_id, habit_id))
+    resultados = cursor.fetchall()
+    close_connection(connection)
+    return resultados
+
+def obtener_tiempo_total_habito(habit_id):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT SUM(duration) AS total_duracion FROM habitlog WHERE habit_id = %s", (habit_id,))
+    resultado = cursor.fetchone()
+    close_connection(connection)
+    return resultado[0]
+
+
+def mostrar_habitos_y_categorias():
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT h.name, c.category_name
+    FROM habit h
+    INNER JOIN category c ON h.category_id = c.category_id
+    """)
+    resultados = cursor.fetchall()
+    close_connection(connection)
+    return resultados
+
+def mostrar_habitos_con_multiples_registros():
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("""
+    SELECT h.name, COUNT(l.log_id) AS total_logs
+    FROM habit h
+    INNER JOIN habitlog l ON h.habit_id = l.habit_id
+    GROUP BY h.habit_id
+    HAVING COUNT(l.log_id) > 1
+    """)
+    resultados = cursor.fetchall()
+    close_connection(connection)
+    return resultados
+
+def filtrar_registros_por_fecha(start_date, end_date):
+    connection = create_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM habitlog WHERE log_date BETWEEN %s AND %s", (start_date, end_date))
+    resultados = cursor.fetchall()
+    close_connection(connection)
+    return resultados

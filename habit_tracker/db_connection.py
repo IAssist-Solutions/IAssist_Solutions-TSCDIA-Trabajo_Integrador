@@ -7,7 +7,7 @@ def create_connection():
             host='localhost',
             database='habit',
             user='root',
-            password='root'
+            password='admin'
         )
         if connection.is_connected():
             return connection
